@@ -3,6 +3,7 @@ package com.myprojects.product.service;
 import com.myprojects.product.dto.ProductDTO;
 import com.myprojects.product.entity.Category;
 import com.myprojects.product.entity.Product;
+import com.myprojects.product.exception.CategoryNotFoundException;
 import com.myprojects.product.mapper.ProductMapper;
 import com.myprojects.product.repository.CategoryRepository;
 import com.myprojects.product.repository.ProductRepository;
@@ -24,7 +25,8 @@ public class ProductService {
     public ProductDTO createProduct(ProductDTO productDTO) {
 
      Category category = categoryRepository.findById(productDTO.getCategoryId())
-             .orElseThrow(()-> new RuntimeException("Category not found"));
+             .orElseThrow(()-> new CategoryNotFoundException("Category id: " + productDTO.getCategoryId()
+                     + " not found"));
 
      //DTO -> Entity
      Product product = ProductMapper.toProductEntity(productDTO, category);
