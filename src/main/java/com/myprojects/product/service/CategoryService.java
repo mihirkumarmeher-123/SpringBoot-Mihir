@@ -8,6 +8,9 @@ import com.myprojects.product.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -27,6 +30,18 @@ public class CategoryService {
     }
 
     // get all categories
+    public List<CategoryDTO> getAllCategories() {
+        return categoryRepository.findAll().stream().map(CategoryMapper::toCategoryDTO).toList();
+    }
+
     // get category by id
+    public CategoryDTO getCategoryById(@PathVariable Long id) {
+        Category category = categoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Category Not Found"));
+        return CategoryMapper.toCategoryDTO(category);
+    }
     // delete category
+    public String deleteCategoryById(@PathVariable Long id) {
+        categoryRepository.deleteById(id);
+        return "Category Deleted Successfully";
+    }
 }
