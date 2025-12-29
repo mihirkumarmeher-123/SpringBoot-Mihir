@@ -32,7 +32,7 @@ public class ProductApplication {
 //		MyApp myApp = context.getBean(MyApp.class);
 //		myApp.run();
 
-//		MyComponent myComponent = new MyComponent();
+//		MyComponent myComponent = new MyComponent();w
 //		System.out.println("Application Started");
 
 		SpringApplication.run(ProductApplication.class, args);

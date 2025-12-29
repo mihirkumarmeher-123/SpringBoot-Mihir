@@ -26,7 +26,6 @@ public class CategoryService {
     // }
 
     // create category
-
     public CategoryDTO createCategory(CategoryDTO categoryDTO) {
         Optional<Category> optionalCategory = categoryRepository.findByName(categoryDTO.getName());
         if(optionalCategory.isPresent()) {
